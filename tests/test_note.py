@@ -17,3 +17,13 @@ def test_note_is_case_insensitive():
 def test_invalid_note():
     with pytest.raises(ValueError):
         Note("H")
+
+
+def test_note_is_case_insensitive_flat():
+    note = Note("eb")
+    assert note.name == "Eb"
+    
+
+def test_note_is_case_insensitive_sharp():
+    note = Note("f#")
+    assert note.name == "F#"
