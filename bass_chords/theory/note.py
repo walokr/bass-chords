@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from bass_chords.theory.chromatic import NOTE_NAMES, NOTE_TO_VALUE
-
+from bass_chords.theory.interval import Interval
 
 @dataclass(frozen=True)
 class Note:
@@ -27,4 +27,13 @@ class Note:
 
         object.__setattr__(self, "name", normalized)
         object.__setattr__(self, "value", NOTE_TO_VALUE[normalized])
+
+    def transpose(self, interval: Interval) -> "Note":
+        """
+        Returns a new note obtained by transposing this note
+        by the given interval.
+        """
+        return Note.from_value(
+            self.value + interval.semitones
+        )
 
