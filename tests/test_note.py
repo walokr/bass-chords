@@ -100,3 +100,7 @@ def test_transpose_prefer_sharp():
     )
 
 
+def test_add_interval():
+    assert (
+        Note("C") + Interval("b3")
+    ) == Note("Eb")
