@@ -7,6 +7,7 @@ from bass_chords.theory.chromatic import (
     SHARP_NAMES,
 )
 
+
 @dataclass(frozen=True)
 class Note:
     name: str
@@ -26,7 +27,7 @@ class Note:
         )
 
         return cls(names[value % 12])
-    
+
     def __post_init__(self):
         normalized = self.name.strip()
 
@@ -50,12 +51,11 @@ class Note:
         Returns a new note obtained by transposing this note
         by the given interval.
         """
-    
+
         return Note.from_value(
             self.value + interval.semitones,
             accidental,
         )
-        
+
     def __add__(self, interval: Interval) -> "Note":
         return self.transpose(interval)
-
