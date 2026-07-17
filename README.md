@@ -1,4 +1,4 @@
-> **Bass Chords** is an open-source project created to help bass players study harmony by finding practical, playable chord voicings on the fretboard.
+> **Bass Chords** An intelligent assistant for bass players.
 
 # Bass Chords
 
