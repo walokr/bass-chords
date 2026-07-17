@@ -1,20 +1,33 @@
 from dataclasses import dataclass, field
-from bass_chords.theory.chromatic import NOTE_NAMES, NOTE_TO_VALUE
 from bass_chords.theory.interval import Interval
+from bass_chords.theory.accidental import Accidental
+from bass_chords.theory.chromatic import (
+    NOTE_TO_VALUE,
+    FLAT_NAMES,
+    SHARP_NAMES,
+)
 
 @dataclass(frozen=True)
 class Note:
     name: str
     value: int = field(init=False)
-    
+
     @classmethod
-    def from_value(cls, value: int):
-        return cls(NOTE_NAMES["flat"][value % 12])
+    def from_value(
+        cls,
+        value: int,
+        accidental: Accidental = Accidental.FLAT,
+    ) -> "Note":
+
+        names = (
+            FLAT_NAMES
+            if accidental is Accidental.FLAT
+            else SHARP_NAMES
+        )
+
+        return cls(names[value % 12])
     
     def __post_init__(self):
-        @classmethod
-        def from_value(cls, value: int):
-            return cls(NOTE_NAMES["flat"][value % 12])
         normalized = self.name.strip()
 
         if len(normalized) == 1:
@@ -28,12 +41,21 @@ class Note:
         object.__setattr__(self, "name", normalized)
         object.__setattr__(self, "value", NOTE_TO_VALUE[normalized])
 
-    def transpose(self, interval: Interval) -> "Note":
+    def transpose(
+        self,
+        interval: Interval,
+        accidental: Accidental = Accidental.FLAT,
+    ) -> "Note":
         """
         Returns a new note obtained by transposing this note
         by the given interval.
         """
+    
         return Note.from_value(
-            self.value + interval.semitones
+            self.value + interval.semitones,
+            accidental,
         )
+        
+    def __add__(self, interval: Interval) -> "Note":
+        return self.transpose(interval)
 

@@ -1,9 +1,36 @@
 """
-Chromatic note mappings.
-
-This module contains the canonical chromatic representation used
-throughout the project.
+Chromatic note definitions.
 """
+
+FLAT_NAMES = (
+    "C",
+    "Db",
+    "D",
+    "Eb",
+    "E",
+    "F",
+    "Gb",
+    "G",
+    "Ab",
+    "A",
+    "Bb",
+    "B",
+)
+
+SHARP_NAMES = (
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B",
+)
 
 NOTE_TO_VALUE = {
     "C": 0,
@@ -23,17 +50,4 @@ NOTE_TO_VALUE = {
     "A#": 10,
     "Bb": 10,
     "B": 11,
-}
-
-NOTE_NAMES = {
-    "flat": (
-        "C", "Db", "D", "Eb",
-        "E", "F", "Gb", "G",
-        "Ab", "A", "Bb", "B",
-    ),
-    "sharp": (
-        "C", "C#", "D", "D#",
-        "E", "F", "F#", "G",
-        "G#", "A", "A#", "B",
-    ),
 }
