@@ -79,6 +79,36 @@ def test_diminished7_formula():
         Interval("bb7"),
     )
 
+def test_add2_formula():
+    formula = ChordFormula("add2")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("2"),
+        Interval("3"),
+        Interval("5"),
+    )
+
+def test_add4_formula():
+    formula = ChordFormula("add4")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("3"),
+        Interval("4"),
+        Interval("5"),
+    )
+
+def test_add9_formula():
+    formula = ChordFormula("add9")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("3"),
+        Interval("5"),
+        Interval("9"),
+    )
+
 
 def test_half_diminished_formula():
     formula = ChordFormula("m7b5")
