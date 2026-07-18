@@ -59,3 +59,9 @@ class Note:
 
     def __add__(self, interval: Interval) -> "Note":
         return self.transpose(interval)
+
+    def __str__(self) -> str:
+        return self.name
+
+    def __repr__(self) -> str:
+        return f"Note('{self.name}')"
