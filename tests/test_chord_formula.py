@@ -79,6 +79,7 @@ def test_diminished7_formula():
         Interval("bb7"),
     )
 
+
 def test_add2_formula():
     formula = ChordFormula("add2")
 
@@ -89,6 +90,7 @@ def test_add2_formula():
         Interval("5"),
     )
 
+
 def test_add4_formula():
     formula = ChordFormula("add4")
 
@@ -98,6 +100,7 @@ def test_add4_formula():
         Interval("4"),
         Interval("5"),
     )
+
 
 def test_add9_formula():
     formula = ChordFormula("add9")
