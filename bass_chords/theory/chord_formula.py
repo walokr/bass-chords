@@ -2,16 +2,34 @@ from dataclasses import dataclass, field
 
 from bass_chords.theory.interval import Interval
 
-
 _CHORD_FORMULAS = {
+    #
+    # Triads
+    #
     "": ("1", "3", "5"),
     "m": ("1", "b3", "5"),
+    "dim": ("1", "b3", "b5"),
+    "aug": ("1", "3", "#5"),
+
+    #
+    # Suspended
+    #
+    "sus2": ("1", "2", "5"),
+    "sus4": ("1", "4", "5"),
+
+    #
+    # Sixths
+    #
+    "6": ("1", "3", "5", "6"),
+    "m6": ("1", "b3", "5", "6"),
+
+    #
+    # Sevenths
+    #
     "7": ("1", "3", "5", "b7"),
     "maj7": ("1", "3", "5", "7"),
     "m7": ("1", "b3", "5", "b7"),
-    "dim": ("1", "b3", "b5"),
 }
-
 
 @dataclass(frozen=True)
 class ChordFormula:
