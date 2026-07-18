@@ -29,7 +29,11 @@ _CHORD_FORMULAS = {
     "7": ("1", "3", "5", "b7"),
     "maj7": ("1", "3", "5", "7"),
     "m7": ("1", "b3", "5", "b7"),
+    "mMaj7": ("1", "b3", "5", "7"),
+    "dim7": ("1", "b3", "b5", "bb7"),
+    "m7b5": ("1", "b3", "b5", "b7"),
 }
+
 
 @dataclass(frozen=True)
 class ChordFormula:

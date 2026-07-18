@@ -36,6 +36,50 @@ def test_dominant7_formula():
     )
 
 
+def test_major7_formula():
+    formula = ChordFormula("maj7")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("3"),
+        Interval("5"),
+        Interval("7"),
+    )
+
+
+def test_minor7_formula():
+    formula = ChordFormula("m7")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("b3"),
+        Interval("5"),
+        Interval("b7"),
+    )
+
+
+def test_minor_major7_formula():
+    formula = ChordFormula("mMaj7")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("b3"),
+        Interval("5"),
+        Interval("7"),
+    )
+
+
+def test_diminished7_formula():
+    formula = ChordFormula("dim7")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("b3"),
+        Interval("b5"),
+        Interval("bb7"),
+    )
+
+
 def test_invalid_formula():
     with pytest.raises(ValueError):
         ChordFormula("pizza")
