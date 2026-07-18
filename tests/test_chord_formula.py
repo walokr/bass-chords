@@ -80,6 +80,17 @@ def test_diminished7_formula():
     )
 
 
+def test_half_diminished_formula():
+    formula = ChordFormula("m7b5")
+
+    assert formula.intervals == (
+        Interval("1"),
+        Interval("b3"),
+        Interval("b5"),
+        Interval("b7"),
+    )
+
+
 def test_invalid_formula():
     with pytest.raises(ValueError):
         ChordFormula("pizza")
