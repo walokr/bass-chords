@@ -4,10 +4,12 @@ from bass_chords.theory.note import Note
 
 
 class BassString(Enum):
+    B = Note("B")
     E = Note("E")
     A = Note("A")
     D = Note("D")
     G = Note("G")
+    C = Note("C")
 
     @property
     def open_note(self):
