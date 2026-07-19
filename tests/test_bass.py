@@ -20,3 +20,15 @@ def test_create_bass():
         BassString.D,
         BassString.G,
     )
+
+
+def test_standard_bass():
+    bass = Bass.standard()
+
+    assert bass.frets == 20
+    assert bass.strings == (
+        BassString.E,
+        BassString.A,
+        BassString.D,
+        BassString.G,
+    )
