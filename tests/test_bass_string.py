@@ -4,7 +4,7 @@ from bass_chords.theory.note import Note
 
 def test_open_notes():
 
-    assert BassString.E.open_note == Note("E")
+    assert BassString(BassString(Note("E")).note) == Note("E")
     assert BassString.A.open_note == Note("A")
     assert BassString.D.open_note == Note("D")
     assert BassString.G.open_note == Note("G")
