@@ -12,8 +12,8 @@ class BassString(Enum):
     C = Note("C")
 
     @property
-    def open_note(self):
+    def note(self):
         return self.value
 
     def note_at(self, fret: int):
-        return Note.from_value(self.open_note.value + fret)
+        return Note.from_value(self.note.value + fret)

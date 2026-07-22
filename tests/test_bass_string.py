@@ -4,10 +4,10 @@ from bass_chords.theory.note import Note
 
 def test_open_notes():
 
-    assert BassString(BassString(Note("E")).note) == Note("E")
-    assert BassString.A.open_note == Note("A")
-    assert BassString.D.open_note == Note("D")
-    assert BassString.G.open_note == Note("G")
+    assert BassString.E.note == Note("E")
+    assert BassString.A.note == Note("A")
+    assert BassString.D.note == Note("D")
+    assert BassString.G.note == Note("G")
 
 
 def test_note_at_fret():
