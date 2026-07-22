@@ -22,7 +22,7 @@ class Position:
 
     def __str__(self):
 
-        text = f"{self.string.name}{self.fret} {self.note}"
+        text = f"{self.string}{self.fret} {self.note}"
 
         if self.finger is not None:
             text += f" ({self.finger})"

@@ -1,19 +1,21 @@
-from enum import Enum
+from dataclasses import dataclass
 
-from bass_chords.theory.note import Note
+from bass_chords.theory.pitch import Pitch
 
 
-class BassString(Enum):
-    B = Note("B")
-    E = Note("E")
-    A = Note("A")
-    D = Note("D")
-    G = Note("G")
-    C = Note("C")
+@dataclass(frozen=True)
+class BassString:
+    pitch: Pitch
 
     @property
     def note(self):
-        return self.value
+        return self.pitch.note
+
+    def pitch_at(self, fret: int) -> Pitch:
+        return self.pitch.transpose(fret)
 
     def note_at(self, fret: int):
-        return Note.from_value(self.note.value + fret)
+        return self.pitch_at(fret).note
+
+    def __str__(self):
+        return str(self.note.name)

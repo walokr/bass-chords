@@ -1,13 +1,20 @@
 from bass_chords.instruments.bass.position import Position
-from bass_chords.instruments.bass.bass_string import BassString
 from bass_chords.instruments.bass.finger import Finger
 from bass_chords.theory.note import Note
+from bass_chords.instruments.bass.bass import Bass
+
+bass = Bass.standard()
+
+e = bass.strings[0]
+a = bass.strings[1]
+d = bass.strings[2]
+g = bass.strings[3]
 
 
 def test_position_calculates_note():
 
     pos = Position(
-        string=BassString.A,
+        string=a,
         fret=8,
     )
 
@@ -17,7 +24,7 @@ def test_position_calculates_note():
 def test_open_string():
 
     pos = Position(
-        string=BassString.E,
+        string=e,
         fret=0,
     )
 
@@ -27,7 +34,7 @@ def test_open_string():
 def test_is_open():
 
     pos = Position(
-        string=BassString.G,
+        string=g,
         fret=0,
     )
 
@@ -37,7 +44,7 @@ def test_is_open():
 def test_is_not_open():
 
     pos = Position(
-        string=BassString.G,
+        string=g,
         fret=5,
     )
 
@@ -47,7 +54,7 @@ def test_is_not_open():
 def test_with_finger():
 
     pos = Position(
-        string=BassString.D,
+        string=d,
         fret=7,
         finger=Finger.MIDDLE,
     )
@@ -58,7 +65,7 @@ def test_with_finger():
 def test_string_representation():
 
     pos = Position(
-        string=BassString.A,
+        string=a,
         fret=8,
         finger=Finger.RING,
     )

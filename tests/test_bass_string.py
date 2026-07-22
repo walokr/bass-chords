@@ -1,22 +1,32 @@
 from bass_chords.instruments.bass.bass_string import BassString
 from bass_chords.theory.note import Note
+from bass_chords.theory.pitch import Pitch
 
 
 def test_open_notes():
 
-    assert BassString.E.note == Note("E")
-    assert BassString.A.note == Note("A")
-    assert BassString.D.note == Note("D")
-    assert BassString.G.note == Note("G")
+    e = BassString(Pitch(Note("E"), 1))
+    a = BassString(Pitch(Note("A"), 1))
+    d = BassString(Pitch(Note("D"), 2))
+    g = BassString(Pitch(Note("G"), 2))
+
+    assert e.note == Note("E")
+    assert a.note == Note("A")
+    assert d.note == Note("D")
+    assert g.note == Note("G")
 
 
 def test_note_at_fret():
 
-    assert BassString.E.note_at(0) == Note("E")
-    assert BassString.E.note_at(1) == Note("F")
-    assert BassString.E.note_at(3) == Note("G")
+    e = BassString(Pitch(Note("E"), 1))
+    a = BassString(Pitch(Note("A"), 1))
+    g = BassString(Pitch(Note("G"), 2))
 
-    assert BassString.A.note_at(0) == Note("A")
-    assert BassString.A.note_at(8) == Note("F")
+    assert e.note_at(0) == Note("E")
+    assert e.note_at(1) == Note("F")
+    assert e.note_at(3) == Note("G")
 
-    assert BassString.G.note_at(7) == Note("D")
+    assert a.note_at(0) == Note("A")
+    assert a.note_at(8) == Note("F")
+
+    assert g.note_at(7) == Note("D")
