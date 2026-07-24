@@ -20,6 +20,7 @@ def test_find_f():
     assert Position(d, 3) in positions
     assert Position(a, 8) in positions
     assert Position(e, 13) in positions
+    assert Position(g, 10) in positions
 
 
 def test_find_open_e():
