@@ -35,8 +35,6 @@ class ChordShape:
             if not position.is_open
         )
 
-    from functools import cached_property
-
     @cached_property
     def lowest_fretted_fret(self) -> int | None:
 
