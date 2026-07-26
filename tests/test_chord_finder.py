@@ -16,6 +16,9 @@ from bass_chords.instruments.bass.chord_shape import ChordShape
 from bass_chords.instruments.bass.fretboard import Fretboard
 from bass_chords.theory.chord import Chord
 from bass_chords.theory.chord import Note
+from bass_chords.player.player import Player
+from bass_chords.instruments.bass.position import Position
+from bass_chords.instruments.bass.bass_string import BassString
 
 
 def test_create_chord_finder():
@@ -29,12 +32,15 @@ def test_create_chord_finder():
 
 def test_find_returns_tuple():
 
+    bassist = Player()
+
     finder = ChordFinder(
         Fretboard(Bass.standard())
     )
 
     shapes = finder.find(
-        Chord.parse("C")
+        Chord.parse("C"),
+        bassist
     )
 
     assert isinstance(shapes, tuple)
@@ -46,8 +52,11 @@ def test_find_returns_chord_shapes():
         Fretboard(Bass.standard())
     )
 
+    bassist = Player()
+
     shapes = finder.find(
-        Chord.parse("C")
+        Chord.parse("C"),
+        bassist
     )
 
     assert all(
@@ -103,8 +112,11 @@ def test_build_shapes_returns_tuple():
         Fretboard(Bass.standard())
     )
 
+    bassist = Player()
+    
     shapes = finder.build_shapes(
-        Chord.parse("C")
+        Chord.parse("C"),
+        bassist
     )
 
     assert isinstance(shapes, tuple)
@@ -116,8 +128,11 @@ def test_build_shapes_returns_at_least_one_shape():
         Fretboard(Bass.standard())
     )
 
+    bassist = Player()
+
     shapes = finder.build_shapes(
-        Chord.parse("C")
+        Chord.parse("C"),
+        bassist
     )
 
     assert len(shapes) > 0
@@ -129,8 +144,11 @@ def test_build_shapes_uses_different_strings():
         Fretboard(Bass.standard())
     )
 
+    bassist = Player()
+
     shapes = finder.build_shapes(
-        Chord.parse("C")
+        Chord.parse("C"),
+        bassist
     )
 
     assert all(
@@ -146,8 +164,11 @@ def test_shapes_are_sorted():
         Fretboard(Bass.standard())
     )
 
+    bassist = Player()
+    
     shapes = finder.build_shapes(
-        Chord.parse("C")
+        Chord.parse("C"),
+        bassist
     )
 
     assert shapes == tuple(
@@ -167,11 +188,52 @@ def test_find_returns_at_least_one_shape():
         Fretboard(Bass.standard())
     )
 
+    bassist = Player()
+
     shapes = finder.find(
-        Chord.parse("C")
+        Chord.parse("C"),
+        bassist
     )
 
     assert len(shapes) > 0
+
+def test_playability_depends_on_bassist():
+
+    bass = Bass.standard()
+
+    shape = ChordShape(
+        positions=(
+            Position(BassString.standard_e(), 1),
+            Position(BassString.standard_a(), 4),
+        )
+    )
+
+    assert shape.is_playable(
+        Player(max_reach_mm=150),
+        bass,
+    )
+
+    assert not shape.is_playable(
+        Player(max_reach_mm=50),
+        bass,
+    )
+
+
+def test_candidate_positions():
+
+    finder = ChordFinder(
+        Fretboard(Bass.standard())
+    )
+
+    candidates = finder.candidate_positions(
+        Chord.parse("C")
+    )
+
+    positions = finder.positions_by_note(
+        Chord.parse("C")
+    )
+
+    assert candidates == positions
 
 # if __name__ == "__main__":
 #     test_build_shapes()

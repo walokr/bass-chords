@@ -2,6 +2,7 @@ from bass_chords.instruments.bass.bass import Bass
 from bass_chords.instruments.bass.position import Position
 from bass_chords.instruments.bass.chord_shape import ChordShape
 from bass_chords.instruments.bass.bass_string import BassString
+from bass_chords.player.player import Player
 
 bass = Bass.standard()
 
@@ -194,6 +195,9 @@ def test_has_not_repeated_strings():
 
 def test_is_playable():
 
+    bass = Bass.standard()
+    bassist = Player()
+
     shape = ChordShape(
         positions=(
             Position(BassString.standard_e(), 3),
@@ -202,12 +206,18 @@ def test_is_playable():
         )
     )
 
-    assert shape.is_playable
+    assert shape.is_playable(
+            bassist,
+            bass,
+        )
 
 
 def test_is_not_playable_with_repeated_strings():
 
     e = BassString.standard_e()
+
+    bass = Bass.standard()
+    bassist = Player()
 
     shape = ChordShape(
         positions=(
@@ -216,10 +226,16 @@ def test_is_not_playable_with_repeated_strings():
         )
     )
 
-    assert not shape.is_playable
+    assert not shape.is_playable(
+        bassist,
+        bass,
+    )
 
 
 def test_is_not_playable_with_large_span():
+
+    bass = Bass.standard()
+    bassist = Player()
 
     shape = ChordShape(
         positions=(
@@ -228,4 +244,7 @@ def test_is_not_playable_with_large_span():
         )
     )
 
-    assert not shape.is_playable
+    assert not shape.is_playable(
+        bassist,
+        bass,
+    )

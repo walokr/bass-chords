@@ -9,8 +9,12 @@ class ChordFinder:
     def __init__(self, fretboard: Fretboard):
         self.fretboard = fretboard
 
-    def find(self, chord: Chord):
-        return self.build_shapes(chord)
+    def find(
+        self,
+        chord: Chord,
+        bassist,
+    ):
+        return self.build_shapes(chord, bassist)
 
     def positions_by_note(self, chord):
 
@@ -21,13 +25,17 @@ class ChordFinder:
 
     def position_combinations(self, chord: Chord):
 
-        positions = self.positions_by_note(chord)
+        positions = self.candidate_positions(chord)
 
         return tuple(
             product(*positions.values())
         )
 
-    def build_shapes(self, chord: Chord):
+    def build_shapes(
+        self,
+        chord: Chord,
+        bassist,
+    ):
 
         combinations = self.position_combinations(chord)
 
@@ -38,19 +46,26 @@ class ChordFinder:
             for combination in combinations
         )
 
-        shapes = self.filter_shapes(shapes)
+        shapes = self.filter_shapes(
+            shapes,
+            bassist,
+        )
 
         return self.sort_shapes(shapes)
 
     def filter_shapes(
         self,
         shapes: tuple[ChordShape, ...],
+        bassist,
     ) -> tuple[ChordShape, ...]:
 
         return tuple(
             shape
             for shape in shapes
-            if shape.is_playable
+            if shape.is_playable(
+                bassist,
+                self.fretboard.bass,
+            )
         )
 
     def sort_shapes(
@@ -78,3 +93,9 @@ class ChordFinder:
             for combination in combinations
             if len({p.string for p in combination}) == len(combination)
         )
+
+    def candidate_positions(
+        self,
+        chord: Chord,
+    ):
+        return self.positions_by_note(chord)

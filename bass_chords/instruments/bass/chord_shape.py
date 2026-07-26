@@ -65,10 +65,20 @@ class ChordShape:
             != len(self.positions)
         )
 
-    @property
-    def is_playable(self):
+    def is_playable(
+        self,
+        bassist,
+        bass,
+    ):
+        if self.has_repeated_strings:
+            return False
 
-        return (
-            not self.has_repeated_strings
-            and self.span <= 4
+        if self.lowest_fretted_fret is None:
+            return True
+
+        distance = bass.fret_distance_mm(
+            self.lowest_fretted_fret,
+            self.highest_fret,
         )
+
+        return distance <= bassist.max_reach_mm
