@@ -30,3 +30,43 @@ def test_note_at_fret():
     assert a.note_at(8) == Note("F")
 
     assert g.note_at(7) == Note("D")
+
+
+def test_string_order():
+
+    strings = (
+        BassString.standard_e(),
+        BassString.standard_a(),
+        BassString.standard_d(),
+        BassString.standard_g(),
+    )
+
+    assert tuple(
+        string.note.name
+        for string in strings
+    ) == (
+        "E",
+        "A",
+        "D",
+        "G",
+    )
+
+
+def test_string_order2():
+
+    strings = (
+        BassString.standard_e(),
+        BassString.standard_a(),
+        BassString.standard_d(),
+        BassString.standard_g(),
+    )
+
+    assert tuple(
+        str(string)
+        for string in strings
+    ) == (
+        "E",
+        "A",
+        "D",
+        "G",
+    )

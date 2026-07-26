@@ -45,3 +45,30 @@ class ChordShape:
             position.fret
             for position in self.fretted_positions
         )
+
+    @property
+    def display_positions(self):
+        return tuple(reversed(self.positions))
+
+    @property
+    def open_string_count(self):
+        return sum(
+            position.is_open
+            for position in self.positions
+        )
+
+    @property
+    def has_repeated_strings(self):
+
+        return (
+            len({p.string for p in self.positions})
+            != len(self.positions)
+        )
+
+    @property
+    def is_playable(self):
+
+        return (
+            not self.has_repeated_strings
+            and self.span <= 4
+        )

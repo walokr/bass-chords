@@ -56,19 +56,6 @@ def test_find_returns_chord_shapes():
     )
 
 
-def test_find_returns_empty_tuple_for_now():
-
-    finder = ChordFinder(
-        Fretboard(Bass.standard())
-    )
-
-    shapes = finder.find(
-        Chord.parse("C")
-    )
-
-    assert shapes == ()
-
-
 def test_positions_by_note():
 
     finder = ChordFinder(
@@ -135,5 +122,56 @@ def test_build_shapes_returns_at_least_one_shape():
 
     assert len(shapes) > 0
 
+
+def test_build_shapes_uses_different_strings():
+
+    finder = ChordFinder(
+        Fretboard(Bass.standard())
+    )
+
+    shapes = finder.build_shapes(
+        Chord.parse("C")
+    )
+
+    assert all(
+        len({position.string for position in shape.positions})
+        == len(shape.positions)
+        for shape in shapes
+    )
+
+
+def test_shapes_are_sorted():
+
+    finder = ChordFinder(
+        Fretboard(Bass.standard())
+    )
+
+    shapes = finder.build_shapes(
+        Chord.parse("C")
+    )
+
+    assert shapes == tuple(
+        sorted(
+            shapes,
+            key=lambda s: (
+                s.span,
+                s.lowest_fretted_fret,
+            ),
+        )
+    )
+
+
+def test_find_returns_at_least_one_shape():
+
+    finder = ChordFinder(
+        Fretboard(Bass.standard())
+    )
+
+    shapes = finder.find(
+        Chord.parse("C")
+    )
+
+    assert len(shapes) > 0
+
 # if __name__ == "__main__":
-#     test_position_combinations()
+#     test_build_shapes()
