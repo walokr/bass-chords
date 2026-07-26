@@ -1,34 +1,96 @@
-> **Bass Chords** An intelligent assistant for bass players.
-
 # Bass Chords
 
-A Python library for finding playable chord voicings on a standard 4-string bass guitar.
+> **Bass Chords**  
+> An intelligent chord and voicing engine for bass players.
 
-The goal of this project is not only to generate chord positions, but also to provide fingerings that are practical for real bass players.
+## Overview
 
-## Features
+Bass Chords is an open-source Python library that generates playable chord voicings for bass guitar.
 
-- Music theory based chord construction
-- Playable voicing generation
-- Fingering suggestions
-- Standard E-A-D-G tuning support
-- Designed with Test-Driven Development (TDD)
+Unlike traditional chord dictionaries, Bass Chords evaluates every generated shape according to both the instrument geometry and the physical capabilities of the bassist, producing realistic and playable results.
 
-## Planned Features
+The project is being developed incrementally using Test-Driven Development (TDD).
 
-- Support for different tunings
-- Automatic chord diagrams
-- Voice leading optimization
-- REST API
-- Web interface
+---
+
+## Current Features
+
+### Music Theory
+
+- Notes
+- Intervals
+- Chord formulas
+- Chord parser
+- Chord construction
+
+### Bass Model
+
+- Standard 4-string bass (E-A-D-G)
+- Scale length support (30", 32", 34", 35", ...)
+- Fretboard model
+- Position model
+- String model
+
+### Chord Engine
+
+- Position search on the fretboard
+- Chord shape generation
+- Duplicate string elimination
+- Shape ordering
+- Playability evaluation
+
+### Playability
+
+Playability is currently evaluated using:
+
+- duplicated string detection
+- real fret distance
+- bassist maximum hand reach
+- instrument scale length
+
+This model will evolve as more ergonomic rules are introduced.
+
+---
+
+## Roadmap
+
+### Chord Engine
+
+- Intelligent candidate position pruning
+- Finger assignment
+- Barre detection
+- Position shifting
+- Difficulty scoring
+- Ranking heuristics
+
+### Music
+
+- Arpeggios
+- Scales
+- Modes
+- Slash chords
+- Extended chords
+
+### Output
+
+- Chord diagrams
+- SVG generation
+- PNG generation
 - PDF chord sheets
-- Internationalization (English, Spanish, ...)
 
-## Project Status
+### Interfaces
 
-🚧 Early development.
+- REST API
+- Web application
+- Desktop application
 
-The project is currently focused on building a solid music theory core before implementing voicing algorithms and user interfaces.
+### Instruments
+
+- Alternative bass tunings
+- 5-string bass
+- 6-string bass
+
+---
 
 ## Technology
 
@@ -37,17 +99,35 @@ The project is currently focused on building a solid music theory core before im
 - dataclasses
 - Type hints
 
-## Philosophy
+---
 
-This project follows a simple principle:
+## Design Principles
 
-> Build small, test everything, and evolve incrementally.
+The project follows a few simple principles:
 
-Every feature starts with a failing test and is implemented using the minimum amount of code required to make that test pass.
+- Test-Driven Development
+- Small evolutionary steps
+- Immutable domain objects
+- Clear separation between music theory and instrument mechanics
+- Keep algorithms simple before optimizing them
+
+---
+
+## Project Status
+
+🚧 Active development.
+
+The theoretical model is stable and the first generation of playable chord shapes is already working.
+
+Current work focuses on improving the intelligence of the chord generation engine.
+
+---
 
 ## Contributing
 
-Contributions, suggestions, bug reports and discussions are welcome.
+Suggestions, discussions, bug reports and pull requests are welcome.
+
+---
 
 ## License
 
