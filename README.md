@@ -7,63 +7,106 @@
 
 Bass Chords is an open-source Python library that generates playable chord voicings for bass guitar.
 
-Unlike traditional chord dictionaries, Bass Chords evaluates every generated shape according to both the instrument geometry and the physical capabilities of the bassist, producing realistic and playable results.
+Unlike traditional chord dictionaries, Bass Chords models three independent concepts:
+
+- music theory,
+- the instrument,
+- the bassist.
+
+By combining them, it generates chord shapes that are both musically correct and physically playable.
 
 The project is being developed incrementally using Test-Driven Development (TDD).
 
 ---
 
-## Current Features
+# Current Features
 
-### Music Theory
+## Music Theory
 
 - Notes
+- Pitches
 - Intervals
 - Chord formulas
 - Chord parser
 - Chord construction
 
-### Bass Model
+---
+
+## Instrument Model
+
+### Bass
 
 - Standard 4-string bass (E-A-D-G)
-- Scale length support (30", 32", 34", 35", ...)
-- Fretboard model
+- Configurable scale length (30", 32", 34", 35", ...)
+- Configurable number of frets
+
+### Fretboard
+
 - Position model
 - String model
+- ChordShape model
 
-### Chord Engine
+---
 
-- Position search on the fretboard
+## Bassist Model
+
+Current implementation:
+
+- Maximum hand reach
+
+The bassist model is independent from the instrument and will continue evolving.
+
+---
+
+## Chord Engine
+
+Current capabilities:
+
+- Position search
+- Candidate position generation
 - Chord shape generation
 - Duplicate string elimination
-- Shape ordering
 - Playability evaluation
+- Shape ordering
 
-### Playability
+---
+
+## Playability Model
 
 Playability is currently evaluated using:
 
 - duplicated string detection
-- real fret distance
-- bassist maximum hand reach
+- real fret spacing
+- bassist maximum reach
 - instrument scale length
 
-This model will evolve as more ergonomic rules are introduced.
+The model is intentionally modular and will gradually incorporate additional ergonomic rules.
 
 ---
 
-## Roadmap
+# Roadmap
 
-### Chord Engine
+## Search Engine
 
-- Intelligent candidate position pruning
+- SearchOptions
+- MovementPreference
+- Target fret search
+- Candidate position pruning
+- Intelligent ranking
+- Voice-leading optimization
+
+---
+
+## Fingering
+
 - Finger assignment
 - Barre detection
 - Position shifting
 - Difficulty scoring
-- Ranking heuristics
 
-### Music
+---
+
+## Music
 
 - Arpeggios
 - Scales
@@ -71,64 +114,98 @@ This model will evolve as more ergonomic rules are introduced.
 - Slash chords
 - Extended chords
 
-### Output
+---
 
-- Chord diagrams
+## Rendering
+
+- ASCII diagrams
 - SVG generation
 - PNG generation
 - PDF chord sheets
 
-### Interfaces
+---
+
+## Interfaces
 
 - REST API
 - Web application
 - Desktop application
 
-### Instruments
+---
 
-- Alternative bass tunings
+## Instruments
+
+- Alternative tunings
 - 5-string bass
 - 6-string bass
 
 ---
 
-## Technology
+# Technology
 
 - Python 3.13+
 - pytest
 - dataclasses
-- Type hints
+- type hints
 
 ---
 
-## Design Principles
+# Design Principles
 
-The project follows a few simple principles:
+Bass Chords follows a strict separation of responsibilities.
+
+The project distinguishes between:
+
+- Music Theory
+- Instrument
+- Bassist
+- Search Strategy
+
+Each concept evolves independently.
+
+The implementation follows:
 
 - Test-Driven Development
 - Small evolutionary steps
 - Immutable domain objects
-- Clear separation between music theory and instrument mechanics
-- Keep algorithms simple before optimizing them
+- Clear and explicit APIs
+- Simple algorithms before optimization
 
 ---
 
-## Project Status
+# Project Status
 
 🚧 Active development.
 
-The theoretical model is stable and the first generation of playable chord shapes is already working.
+The theoretical model is stable.
 
-Current work focuses on improving the intelligence of the chord generation engine.
+The first playable chord generation engine is complete.
+
+Current development focuses on improving search intelligence through configurable search strategies and ergonomic evaluation.
 
 ---
 
-## Contributing
+# Philosophy
+
+A chord is not a fingering.
+
+A fingering depends on:
+
+- the music,
+- the instrument,
+- the bassist,
+- and the musical intention.
+
+Bass Chords models each concept independently before searching for the best solution.
+
+---
+
+# Contributing
 
 Suggestions, discussions, bug reports and pull requests are welcome.
 
 ---
 
-## License
+# License
 
 MIT License
