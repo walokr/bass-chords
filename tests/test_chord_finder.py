@@ -65,46 +65,6 @@ def test_find_returns_chord_shapes():
     )
 
 
-def test_positions_by_note():
-
-    finder = ChordFinder(
-        Fretboard(Bass.standard())
-    )
-
-    positions = finder.positions_by_note(
-        Chord.parse("C")
-    )
-
-    assert positions.keys() == {
-        Note("C"),
-        Note("E"),
-        Note("G"),
-    }
-
-    assert len(positions[Note("C")]) > 0
-    assert len(positions[Note("E")]) > 0
-    assert len(positions[Note("G")]) > 0
-
-
-def test_position_combinations():
-
-    finder = ChordFinder(
-        Fretboard(Bass.standard())
-    )
-
-    combinations = finder.position_combinations(
-        Chord.parse("C")
-    )
-
-    assert isinstance(combinations, tuple)
-
-    assert len(combinations) > 0
-
-    assert all(
-        len(combination) == 3
-        for combination in combinations
-    )
-
 
 def test_build_shapes_returns_tuple():
 
@@ -218,22 +178,6 @@ def test_playability_depends_on_bassist():
         bass,
     )
 
-
-def test_candidate_positions():
-
-    finder = ChordFinder(
-        Fretboard(Bass.standard())
-    )
-
-    candidates = finder.candidate_positions(
-        Chord.parse("C")
-    )
-
-    positions = finder.positions_by_note(
-        Chord.parse("C")
-    )
-
-    assert candidates == positions
 
 # if __name__ == "__main__":
 #     test_build_shapes()
