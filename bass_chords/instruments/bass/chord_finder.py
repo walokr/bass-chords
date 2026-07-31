@@ -2,6 +2,7 @@ from bass_chords.instruments.bass.fretboard import Fretboard
 from bass_chords.theory.chord import Chord
 from bass_chords.instruments.bass.chord_shape import ChordShape
 from itertools import product
+
 from bass_chords.instruments.bass.candidate_position_finder import CandidatePositionFinder
 from bass_chords.instruments.bass.candidate_combination_filter import CandidateCombinationFilter
 
@@ -23,7 +24,6 @@ class ChordFinder:
     ):
         return self.build_shapes(chord, bassist)
 
-    
     def position_combinations(self, chord: Chord):
 
         positions = self.candidate_positions(chord)
@@ -39,7 +39,7 @@ class ChordFinder:
     ):
 
         combinations = self.candidate_position_finder.find(chord)
-        
+
         shapes = tuple(
             ChordShape(positions=combination)
             for combination in combinations

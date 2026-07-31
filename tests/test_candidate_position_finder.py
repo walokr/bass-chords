@@ -3,7 +3,7 @@ from bass_chords.instruments.bass.bass import Bass
 from bass_chords.theory.chord import Chord
 from bass_chords.theory.note import Note
 from bass_chords.instruments.bass.candidate_position_finder import CandidatePositionFinder
-
+from bass_chords.search.search_options import SearchOptions
 
 def test_positions_by_note():
 
@@ -44,6 +44,7 @@ def test_position_combinations():
         for combination in combinations
     )
 
+
 def test_find():
 
     finder = CandidatePositionFinder(
@@ -61,5 +62,25 @@ def test_find():
     assert all(
         len({p.string for p in combination})
         == len(combination)
+        for combination in candidates
+    )
+
+
+def test_max_fret_limits_candidates():
+
+    finder = CandidatePositionFinder(
+        Fretboard(Bass.standard()),
+        SearchOptions(max_fret=5),
+    )
+
+    candidates = finder.find(
+        Chord.parse("C")
+    )
+
+    assert all(
+        all(
+            position.fret <= 5
+            for position in combination
+        )
         for combination in candidates
     )

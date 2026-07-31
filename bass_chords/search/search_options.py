@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 
+DEFAULT_MAX_SEARCH_FRET = 24
+
 
 @dataclass(frozen=True)
 class SearchOptions:
 
-    max_fret: int | None = None
+    max_fret: int = DEFAULT_MAX_SEARCH_FRET
 
     center_fret: int | None = None
 
     movement_preference: str = "any"
-
