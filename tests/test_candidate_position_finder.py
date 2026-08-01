@@ -2,7 +2,8 @@ from bass_chords.instruments.bass.fretboard import Fretboard
 from bass_chords.instruments.bass.bass import Bass
 from bass_chords.theory.chord import Chord
 from bass_chords.theory.note import Note
-from bass_chords.instruments.bass.candidate_position_finder import CandidatePositionFinder
+from bass_chords.instruments.bass.candidate_position_finder \
+    import CandidatePositionFinder
 from bass_chords.search.search_options import SearchOptions
 from bass_chords.instruments.bass.position import Position
 from bass_chords.instruments.bass.bass_string import BassString

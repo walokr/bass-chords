@@ -3,8 +3,10 @@ from bass_chords.theory.chord import Chord
 from bass_chords.instruments.bass.chord_shape import ChordShape
 from itertools import product
 
-from bass_chords.instruments.bass.candidate_position_finder import CandidatePositionFinder
-from bass_chords.instruments.bass.candidate_combination_filter import CandidateCombinationFilter
+from bass_chords.instruments.bass.candidate_position_finder \
+    import CandidatePositionFinder
+from bass_chords.instruments.bass.candidate_combination_filter \
+    import CandidateCombinationFilter
 
 
 class ChordFinder:
