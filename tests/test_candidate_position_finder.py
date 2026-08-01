@@ -163,3 +163,32 @@ def test_distance_to_center_returns_absolute_distance():
     )
 
     assert finder._distance_to_center(combination) == 3
+
+
+def test_candidates_are_sorted_by_distance_to_center():
+
+    finder = CandidatePositionFinder(
+        Fretboard(Bass.standard()),
+        SearchOptions(center_fret=7),
+    )
+
+    near = (
+        Position(BassString.standard_e(), 6),
+        Position(BassString.standard_a(), 7),
+        Position(BassString.standard_d(), 8),
+    )
+
+    far = (
+        Position(BassString.standard_e(), 11),
+        Position(BassString.standard_a(), 12),
+        Position(BassString.standard_d(), 13),
+    )
+
+    ordered = tuple(
+        sorted(
+            (far, near),
+            key=finder._distance_to_center,
+        )
+    )
+
+    assert ordered == (near, far)

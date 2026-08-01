@@ -62,7 +62,14 @@ class CandidatePositionFinder:
 
         combinations = self.position_combinations(chord)
 
-        return self.filter(combinations)
+        candidates = self.filter(combinations)
+
+        return tuple(
+            sorted(
+                candidates,
+                key=self._distance_to_center,
+            )
+        )
 
     def _inside_search_range(self, combination):
 
