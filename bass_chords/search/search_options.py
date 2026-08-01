@@ -2,9 +2,10 @@ from dataclasses import dataclass
 
 DEFAULT_MAX_SEARCH_FRET = 24
 
-
 @dataclass(frozen=True)
 class SearchOptions:
+
+    min_fret: int = 0
 
     max_fret: int = DEFAULT_MAX_SEARCH_FRET
 

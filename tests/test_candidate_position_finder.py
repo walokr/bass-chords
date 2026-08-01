@@ -4,6 +4,8 @@ from bass_chords.theory.chord import Chord
 from bass_chords.theory.note import Note
 from bass_chords.instruments.bass.candidate_position_finder import CandidatePositionFinder
 from bass_chords.search.search_options import SearchOptions
+from bass_chords.instruments.bass.position import Position
+from bass_chords.instruments.bass.bass_string import BassString
 
 def test_positions_by_note():
 
@@ -84,3 +86,34 @@ def test_max_fret_limits_candidates():
         )
         for combination in candidates
     )
+
+def test_respects_min_fret():
+
+    finder = CandidatePositionFinder(
+        Fretboard(Bass.standard()),
+        SearchOptions(min_fret=5),
+    )
+
+    combination = (
+        Position(BassString.standard_e(), 3),
+        Position(BassString.standard_a(), 5),
+        Position(BassString.standard_d(), 5),
+    )
+
+    assert not finder._inside_search_range(combination)
+
+
+def test_accepts_positions_above_min_fret():
+
+    finder = CandidatePositionFinder(
+        Fretboard(Bass.standard()),
+        SearchOptions(min_fret=5),
+    )
+
+    combination = (
+        Position(BassString.standard_e(), 5),
+        Position(BassString.standard_a(), 7),
+        Position(BassString.standard_d(), 8),
+    )
+
+    assert finder._inside_search_range(combination)

@@ -46,11 +46,11 @@ class CandidatePositionFinder:
 
     def _is_candidate(self, combination):
 
-        return (
-            self._different_strings(combination)
-            and self._inside_search_range(combination)
-            and self._near_center_fret(combination)
-        )
+        return all((
+            self._different_strings(combination),
+            self._inside_search_range(combination),
+            self._near_center_fret(combination),
+        ))
 
     def _near_center_fret(self, combination):
 
@@ -75,6 +75,17 @@ class CandidatePositionFinder:
     def _inside_search_range(self, combination):
 
         return all(
-            position.fret <= self.search_options.max_fret
+            self.search_options.min_fret
+            <= position.fret
+            <= self.search_options.max_fret
             for position in combination
         )
+
+    def _average_fret(self, combination):
+
+        frets = tuple(
+            position.fret
+            for position in combination
+        )
+
+        return sum(frets) / len(frets)
