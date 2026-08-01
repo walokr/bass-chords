@@ -49,15 +49,7 @@ class CandidatePositionFinder:
         return all((
             self._different_strings(combination),
             self._inside_search_range(combination),
-            self._near_center_fret(combination),
         ))
-
-    def _near_center_fret(self, combination):
-
-        # TODO:
-        # Cuando SearchOptions.center_fret tenga un valor,
-        # priorizar las combinaciones cercanas a esa zona.
-        return True
 
     def _different_strings(self, combination):
 
