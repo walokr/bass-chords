@@ -93,3 +93,15 @@ class CandidatePositionFinder:
     def _center_fret(self):
 
         return self.search_options.center_fret
+
+    def _distance_to_center(self, combination):
+
+        center = self._center_fret()
+
+        if center is None:
+            return 0
+
+        return abs(
+            self._average_fret(combination)
+            - center
+        )

@@ -131,3 +131,35 @@ def test_center_fret():
     )
 
     assert finder._center_fret() == 7
+
+
+def test_distance_to_center():
+
+    finder = CandidatePositionFinder(
+        Fretboard(Bass.standard()),
+        SearchOptions(center_fret=7),
+    )
+
+    combination = (
+        Position(BassString.standard_e(), 6),
+        Position(BassString.standard_a(), 7),
+        Position(BassString.standard_d(), 8),
+    )
+
+    assert finder._distance_to_center(combination) == 0
+
+
+def test_distance_to_center_returns_absolute_distance():
+
+    finder = CandidatePositionFinder(
+        Fretboard(Bass.standard()),
+        SearchOptions(center_fret=7),
+    )
+
+    combination = (
+        Position(BassString.standard_e(), 9),
+        Position(BassString.standard_a(), 10),
+        Position(BassString.standard_d(), 11),
+    )
+
+    assert finder._distance_to_center(combination) == 3
