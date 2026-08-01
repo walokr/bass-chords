@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 DEFAULT_MAX_SEARCH_FRET = 24
 
+
 @dataclass(frozen=True)
 class SearchOptions:
 

@@ -89,3 +89,7 @@ class CandidatePositionFinder:
         )
 
         return sum(frets) / len(frets)
+
+    def _center_fret(self):
+
+        return self.search_options.center_fret
