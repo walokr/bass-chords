@@ -4,6 +4,7 @@ from functools import cached_property
 from bass_chords.instruments.bass.bass_string import BassString
 from bass_chords.instruments.bass.finger import Finger
 from bass_chords.theory.note import Note
+from bass_chords.theory.pitch import Pitch
 
 
 @dataclass(frozen=True)
@@ -13,12 +14,16 @@ class Position:
     finger: Finger | None = None
 
     @cached_property
-    def note(self) -> Note:
-        return self.string.note_at(self.fret)
+    def pitch(self) -> Pitch:
+        return self.string.pitch_at(self.fret)
 
     @property
     def is_open(self) -> bool:
         return self.fret == 0
+
+    @cached_property
+    def note(self) -> Note:
+        return self.pitch.note
 
     def __str__(self):
 

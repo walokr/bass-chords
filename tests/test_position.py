@@ -2,6 +2,8 @@ from bass_chords.instruments.bass.position import Position
 from bass_chords.instruments.bass.finger import Finger
 from bass_chords.theory.note import Note
 from bass_chords.instruments.bass.bass import Bass
+from bass_chords.instruments.bass.bass_string import BassString
+from bass_chords.theory.pitch import Pitch
 
 bass = Bass.standard()
 
@@ -71,3 +73,16 @@ def test_string_representation():
     )
 
     assert str(pos) == "A8 F (3)"
+
+
+def test_pitch():
+
+    position = Position(
+        BassString.standard_e(),
+        5,
+    )
+
+    assert position.pitch == Pitch(
+        Note("A"),
+        1,
+    )

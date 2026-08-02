@@ -3,6 +3,7 @@ from itertools import product
 from bass_chords.instruments.bass.fretboard import Fretboard
 from bass_chords.theory.chord import Chord
 from bass_chords.search.search_options import SearchOptions
+from bass_chords.instruments.bass.voicing import Voicing
 
 DEFAULT_MAX_SEARCH_FRET = 12
 
@@ -80,15 +81,6 @@ class CandidatePositionFinder:
             for position in combination
         )
 
-    def _average_fret(self, combination):
-
-        frets = tuple(
-            position.fret
-            for position in combination
-        )
-
-        return sum(frets) / len(frets)
-
     def _center_fret(self):
 
         return self.search_options.center_fret
@@ -100,7 +92,9 @@ class CandidatePositionFinder:
         if center is None:
             return 0
 
+        voicing = Voicing(combination)
+
         return abs(
-            self._average_fret(combination)
+            voicing.average_fret
             - center
         )
