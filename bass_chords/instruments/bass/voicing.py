@@ -3,6 +3,7 @@ from bass_chords.instruments.bass.position import Position
 from functools import cached_property
 from bass_chords.theory.pitch import Pitch
 from bass_chords.theory.note import Note
+from bass_chords.instruments.bass.bass_string import BassString
 
 
 @dataclass(frozen=True)
@@ -62,7 +63,7 @@ class Voicing:
         )
 
     @cached_property
-    def strings(self):
+    def strings(self) -> tuple[BassString, ...]:
 
         return tuple(
             position.string
@@ -78,4 +79,36 @@ class Voicing:
                 for position in self.positions
             })
             != len(self.positions)
+        )
+
+    @cached_property
+    def fret_range(self) -> tuple[int, int]:
+
+        return (
+            self.lowest_fret,
+            self.highest_fret,
+        )
+
+    @cached_property
+    def lowest_pitch(self) -> Pitch:
+
+        return min(
+            self.pitches,
+            key=lambda pitch: pitch.value,
+        )
+
+    @cached_property
+    def highest_pitch(self) -> Pitch:
+
+        return max(
+            self.pitches,
+            key=lambda pitch: pitch.value,
+        )
+
+    @cached_property
+    def pitch_range(self) -> int:
+
+        return (
+            self.highest_pitch.value
+            - self.lowest_pitch.value
         )

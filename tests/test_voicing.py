@@ -2,6 +2,7 @@ from bass_chords.instruments.bass.bass_string import BassString
 from bass_chords.instruments.bass.position import Position
 from bass_chords.instruments.bass.voicing import Voicing
 from bass_chords.theory.note import Note
+from bass_chords.theory.pitch import Pitch
 
 
 def test_positions():
@@ -90,3 +91,36 @@ def test_has_repeated_strings():
     ))
 
     assert voicing.has_repeated_strings is True
+
+
+def test_fret_range():
+
+    voicing = Voicing((
+        Position(BassString.standard_e(), 5),
+        Position(BassString.standard_a(), 2),
+        Position(BassString.standard_d(), 7),
+    ))
+
+    assert voicing.fret_range == (2, 7)
+
+
+def test_lowest_pitch():
+
+    voicing = Voicing((
+        Position(BassString.standard_e(), 3),   # G1
+        Position(BassString.standard_a(), 2),   # B1
+        Position(BassString.standard_d(), 5),   # G2
+    ))
+
+    assert voicing.lowest_pitch == Pitch(Note("G"), 1)
+
+
+def test_highest_pitch():
+
+    voicing = Voicing((
+        Position(BassString.standard_e(), 3),   # G1
+        Position(BassString.standard_a(), 2),   # B1
+        Position(BassString.standard_d(), 5),   # G2
+    ))
+
+    assert voicing.highest_pitch == Pitch(Note("G"), 2)
