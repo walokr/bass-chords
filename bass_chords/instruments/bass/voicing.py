@@ -112,3 +112,43 @@ class Voicing:
             self.highest_pitch.value
             - self.lowest_pitch.value
         )
+
+    @cached_property
+    def contains_open_strings(self) -> bool:
+
+        return any(
+            position.is_open
+            for position in self.positions
+        )
+
+    @cached_property
+    def open_string_count(self) -> int:
+
+        return sum(
+            position.is_open
+            for position in self.positions
+        )
+
+    @cached_property
+    def lowest_string(self) -> BassString:
+
+        return min(
+            self.strings,
+            key=lambda string: string.order,
+        )
+
+    @cached_property
+    def highest_string(self) -> BassString:
+
+        return max(
+            self.strings,
+            key=lambda string: string.order,
+        )
+
+    @cached_property
+    def string_range(self) -> int:
+
+        return (
+            self.highest_string.order
+            - self.lowest_string.order
+        )

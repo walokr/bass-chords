@@ -124,3 +124,69 @@ def test_highest_pitch():
     ))
 
     assert voicing.highest_pitch == Pitch(Note("G"), 2)
+
+
+def test_contains_open_strings():
+
+    voicing = Voicing((
+        Position(BassString.standard_e(), 0),
+        Position(BassString.standard_a(), 2),
+        Position(BassString.standard_d(), 2),
+    ))
+
+    assert voicing.contains_open_strings is True
+
+
+def test_does_not_contain_open_strings():
+
+    voicing = Voicing((
+        Position(BassString.standard_e(), 3),
+        Position(BassString.standard_a(), 2),
+        Position(BassString.standard_d(), 5),
+    ))
+
+    assert voicing.contains_open_strings is False
+
+
+def test_open_string_count():
+
+    voicing = Voicing((
+        Position(BassString.standard_e(), 0),
+        Position(BassString.standard_a(), 0),
+        Position(BassString.standard_d(), 5),
+    ))
+
+    assert voicing.open_string_count == 2
+
+
+def test_lowest_string():
+
+    voicing = Voicing((
+        Position(BassString.standard_a(), 3),
+        Position(BassString.standard_d(), 2),
+        Position(BassString.standard_e(), 5),
+    ))
+
+    assert voicing.lowest_string == BassString.standard_e()
+
+
+def test_highest_string():
+
+    voicing = Voicing((
+        Position(BassString.standard_a(), 3),
+        Position(BassString.standard_g(), 2),
+        Position(BassString.standard_e(), 5),
+    ))
+
+    assert voicing.highest_string == BassString.standard_g()
+
+
+def test_string_range():
+
+    voicing = Voicing((
+        Position(BassString.standard_a(), 3),
+        Position(BassString.standard_g(), 2),
+        Position(BassString.standard_e(), 5),
+    ))
+
+    assert voicing.string_range == 3

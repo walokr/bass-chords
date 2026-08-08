@@ -15,7 +15,6 @@ from bass_chords.instruments.bass.chord_finder import ChordFinder
 from bass_chords.instruments.bass.chord_shape import ChordShape
 from bass_chords.instruments.bass.fretboard import Fretboard
 from bass_chords.theory.chord import Chord
-from bass_chords.theory.chord import Note
 from bass_chords.player.player import Player
 from bass_chords.instruments.bass.position import Position
 from bass_chords.instruments.bass.bass_string import BassString
@@ -65,7 +64,6 @@ def test_find_returns_chord_shapes():
     )
 
 
-
 def test_build_shapes_returns_tuple():
 
     finder = ChordFinder(
@@ -73,7 +71,7 @@ def test_build_shapes_returns_tuple():
     )
 
     bassist = Player()
-    
+
     shapes = finder.build_shapes(
         Chord.parse("C"),
         bassist
@@ -125,7 +123,7 @@ def test_shapes_are_sorted():
     )
 
     bassist = Player()
-    
+
     shapes = finder.build_shapes(
         Chord.parse("C"),
         bassist
@@ -156,6 +154,7 @@ def test_find_returns_at_least_one_shape():
     )
 
     assert len(shapes) > 0
+
 
 def test_playability_depends_on_bassist():
 
